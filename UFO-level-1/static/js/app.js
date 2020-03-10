@@ -19,16 +19,27 @@ var button = d3.select("#filter-btn");
 
 button.on("click", function() {
 
-  // Select the input element and get the raw HTML node
-  var inputElement = d3.select("#datetime");
+  // Select the date input element and get the raw HTML node
+  var inputDateElement = d3.select("#datetime");
+
+  // Select the city input element and get the raw HTML node
+  var inputCityElement = d3.select("#city");
+
+  // Get the date value property of the input element
+  var inputDateValue = inputDateElement.property("value");
 
   // Get the value property of the input element
-  var inputValue = inputElement.property("value");
+  var inputCityValue = inputCityElement.property("value");
 
 
-  console.log(inputValue);
+  console.log(inputCityValue);
 
-  var filteredData = tableData.filter(record => record.datetime === inputValue);
+  //Filter only the date
+  var filteredDate = tableData.filter(record => record.datetime === inputDateValue);
+  //Filter only the city
+  var filteredCity = tableData.filter(record => record.city === inputCityValue);
+  //Filter by both City and Date
+  var filteredData = tableData.filter(record => record.datetime === inputDateValue && ecord => record.city === inputCityValue);
 
   console.log(filteredData);
 
