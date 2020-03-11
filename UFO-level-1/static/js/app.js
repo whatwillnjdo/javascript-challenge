@@ -3,20 +3,21 @@ var tableData = data;
 
 var	tbody = d3.select('tbody');
 
-console.log(tableData);
-
+function populateTable(tableContent) {
+    tableContent.forEach((record) => {
+      var oneNewRow = tbody.append('tr');
+      Object.entries(record).forEach(([key, value]) => {
+        var cell = oneNewRow.append('td');
+        cell.text(value);
+      });
+    });
+}
 //
-tableData.forEach((record) => {
-  var oneNewRow = tbody.append('tr');
-  Object.entries(record).forEach(([key, value]) => {
-    var cell = oneNewRow.append('td');
-    cell.text(value);
-  });
-});
+populateTable(tableData);
+
 
 //
 var button = d3.select("#filter-btn");
-
 button.on("click", function() {
 
   // Select the date input element and get the raw HTML node
@@ -39,18 +40,15 @@ button.on("click", function() {
   //Filter only the city
   var filteredCity = tableData.filter(record => record.city === inputCityValue);
   //Filter by both City and Date
-  var filteredData = tableData.filter(record => record.datetime === inputDateValue && ecord => record.city === inputCityValue);
+  var filteredData = tableData.filter((record => record.datetime === inputDateValue) && (record => record.city === inputCityValue));
 
   console.log(filteredData);
 
+  var lengthDate = inputDateValue.length;
+  console.log(lengthDate);
+
   tbody.html("");
 
-  filteredData.forEach((record) => {
-    var oneNewRow = tbody.append('tr');
-    Object.entries(record).forEach(([key, value]) => {
-      var cell = oneNewRow.append('td');
-      cell.text(value);
-    });
-  });
+  populateTable(filteredData);
 
 });
