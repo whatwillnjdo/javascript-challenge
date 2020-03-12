@@ -33,22 +33,28 @@ button.on("click", function() {
   var inputCityValue = inputCityElement.property("value");
 
 
-  console.log(inputCityValue);
+  console.log(tableData.length);
 
   //Filter only the date
   var filteredDate = tableData.filter(record => record.datetime === inputDateValue);
   //Filter only the city
   var filteredCity = tableData.filter(record => record.city === inputCityValue);
   //Filter by both City and Date
-  var filteredData = tableData.filter((record => record.datetime === inputDateValue) && (record => record.city === inputCityValue));
+  var filteredData = tableData.filter((record => record.datetime === inputDateValue) &&
+                                      (record => record.city === inputCityValue)
+                                     );
 
   console.log(filteredData);
 
-  var lengthDate = inputDateValue.length;
-  console.log(lengthDate);
 
   tbody.html("");
-
   populateTable(filteredData);
 
+
+});
+
+var resetButton = d3.select("#unfilter-btn");
+resetButton.on("click", function() {
+  tbody.html("");
+  populateTable(tableData);
 });
