@@ -32,19 +32,21 @@ button.on("click", function() {
   // Get the value property of the input element
   var inputCityValue = inputCityElement.property("value");
 
-
-  console.log(tableData.length);
-
   //Filter only the date
   var filteredDate = tableData.filter(record => record.datetime === inputDateValue);
   //Filter only the city
   var filteredCity = tableData.filter(record => record.city === inputCityValue);
-  //Filter by both City and Date
-  var filteredData = tableData.filter((record => record.datetime === inputDateValue) &&
-                                      (record => record.city === inputCityValue)
-                                     );
 
-  console.log(filteredData);
+  //if(inputCityValue.length !== 0){
+  //  var filteredCity = tableData.filter(record => record.city === record.city);
+  //}
+
+  console.log(filteredCity.length);
+
+  //Filter by both City and Date
+  var filteredData = (filteredDate && filteredCity)
+
+  //console.log(filteredData);
 
 
   tbody.html("");
